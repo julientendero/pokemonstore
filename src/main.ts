@@ -10,7 +10,3 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
-
-
-// X-Api-Key
-// pokemon api key: f18e8261-b63b-4b18-af9e-a90c90152d82
