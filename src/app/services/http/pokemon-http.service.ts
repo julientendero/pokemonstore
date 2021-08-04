@@ -26,13 +26,20 @@ export class PokemonHttpService {
     const options: any =  {
       headers: headers,
       params: params
-    };    
+    };   
+    
+    console.log("TEST 1: ", url);
+    console.log("TEST 2: ", options);
 
+    return this.http.get(url, options);
+
+    /*
     this.http.get(url, options).subscribe(resPokemon => {
       console.log("=====> GET POKEMONS 3: ", resPokemon);
     },
     error => {
       console.log("=====> GET POKEMONS 4: ", error);
     });
+    */
   }
 }

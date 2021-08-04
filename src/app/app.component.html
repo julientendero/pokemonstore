@@ -12,18 +12,42 @@
 
 <mat-drawer-container class="drawer-container" autosize>
 <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
-  <p>Auto-resizing sidenav</p>
-  <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-  <button (click)="showFiller = !showFiller" mat-raised-button>
-    Toggle extra text
-  </button>
+  <h1>Votre Panier</h1>
+
+  <div class="book-item" *ngFor="let b of bookCollection$ | async">
+      <p *ngIf="b">{{b.name}}</p>
+      <img *ngIf="b && b.images" [src]="b.images.small" alt="image"/>
+    <button
+      *ngIf="b"
+      (click)="onRemove(b.id)"
+      data-test="remove-button"
+    >Retirer du panier</button>
+  </div>
 </mat-drawer>
 
-<div class="example-sidenav-content">
-  <button type="button" mat-button (click)="drawer.toggle()">
-    Toggle sidenav
-  </button>
+<mat-grid-list cols="4" rowHeight="1:1">
+  <mat-grid-tile *ngFor="let book of books$ | async">
+    <p *ngIf="book">{{book.name}}</p>
+    <img *ngIf="book && book.images" [src]="book.images.small" alt="image"/>
+    <button
+      *ngIf="book"
+      (click)="onAdd(book.id)"
+      data-test="add-button"
+    >Ajouter au panier</button>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<!--
+<div class="book-item" *ngFor="let book of books$ | async">
+  <p *ngIf="book">{{book.name}}</p>
+  <img *ngIf="book && book.images" [src]="book.images.small" alt="image"/>
+  <button
+    *ngIf="book"
+    (click)="onAdd(book.id)"
+    data-test="add-button"
+  >Ajouter au panier</button>
 </div>
+-->
 
 </mat-drawer-container>
 
