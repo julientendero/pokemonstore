@@ -4,8 +4,11 @@ simple interface for purchase pokemon cards
 Configuration:
 
 Angular CLI: 12.1.4
+
 Node: 14.17.4
+
 Package Manager: npm 6.14.14
+
 OS: win32 ia32
 
 Angular: 12.1.4
