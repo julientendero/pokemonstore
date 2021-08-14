@@ -2,8 +2,9 @@
   <!-- Menu situé en haut de page -->
   <mat-toolbar>
     <span>Pokemon Store</span>
+    <span class="menu-spacer"></span>
     <button type="button" mat-button (click)="drawer.toggle()">
-      Panier
+      Mon Panier
     </button>
   </mat-toolbar>
 </p>
@@ -12,16 +13,26 @@
 <!-- Componsant correspondant au panier de l'utilisateur -->
 <mat-drawer-container class="drawer-container" autosize>
 <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
-  <h1>Votre Panier</h1>
+  <h1>Panier</h1>
+  <button type="button" mat-button (click)="drawer.close()">
+    Fermer
+  </button>
   <div class="book-item" *ngFor="let cardPanier of cardsBucket$ | async">
     <app-card-view [card]="cardPanier" [inBucket]="true" (removeCardEvent)="onRemove($event)"></app-card-view>
   </div>
+
+  <div #bilanPanier>
+    <h3>Nombre d'articles: {{ cptCardsInBucket }}</h3>
+    <h3>Prix total: {{ totalPriceInBucket }} &euro;</h3> 
+  </div>
+
+
 </mat-drawer>
 
 <!-- Ensemble des cartes disponibles à la vente -->
 <mat-grid-list cols="4" rowHeight="1:1.1">
   <mat-grid-tile *ngFor="let card of cards$ | async">
-    <app-card-view [card]="card" [inBucket]="false" (addCardEvent)="onAdd($event);drawer.open();"></app-card-view>
+    <app-card-view [card]="card" [inBucket]="false" (addCardEvent)="onAdd($event);drawer.open();doScroll(bilanPanier)"></app-card-view>
   </mat-grid-tile>
 </mat-grid-list>
 

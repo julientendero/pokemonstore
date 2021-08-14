@@ -8,11 +8,8 @@
     <div>
 
     <!-- Affichage du prix de la carte le plus bas sur le marché -->
-    <div *ngIf="card
-            && card.cardmarket
-            && card.cardmarket.prices
-            && card.cardmarket.prices.lowPrice">
-        Prix: {{card.cardmarket.prices.lowPrice}} &euro;
+    <div *ngIf="lowPriceCard">
+        Prix: {{lowPriceCard}} &euro;
     </div>
     
     <!-- Ajout de la carte dans le panier (s'il n'y est pas déja présent) -->

@@ -26,6 +26,11 @@ export class AppComponent {
   // Observable sur l'ensemble des cartes selectionnées dans le panier
   public cardsBucket$ = this.store$.pipe(select(selectCardCollection));
 
+  // Nombre d'articles ajoutés au panier
+  public cptCardsInBucket: number = 0;
+
+  // Prix total des articles présent dans le panier
+  public totalPriceInBucket: number = 0;
 
   constructor(
     private store$: Store<AppState>,
@@ -33,12 +38,43 @@ export class AppComponent {
   {
   }
 
-  onAdd(cardId: string) {
+  public onAdd(card: any) {
+    const cardId: string = card.id;
     this.store$.dispatch(addCard({ cardId }));
+    this.cptCardsInBucket++;
+
+    if (card
+      && card.cardmarket
+      && card.cardmarket.prices
+      && card.cardmarket.prices.lowPrice)
+    {
+      this.totalPriceInBucket += card.cardmarket.prices.lowPrice;
+      this.totalPriceInBucket = Math.round(this.totalPriceInBucket * 100) / 100;
+    }
   }
  
-  onRemove(cardId: string) {
+  public onRemove(card: any) {
+    const cardId: string = card.id;
     this.store$.dispatch(removeCard({ cardId }));
+    this.cptCardsInBucket--;
+
+    if (card
+      && card.cardmarket
+      && card.cardmarket.prices
+      && card.cardmarket.prices.lowPrice)
+    {
+      this.totalPriceInBucket -= card.cardmarket.prices.lowPrice;
+      this.totalPriceInBucket = Math.round(this.totalPriceInBucket * 100) / 100;
+    }
+  }
+
+  public doScroll(elmnt: HTMLElement)
+  {
+    setTimeout(function(){ 
+
+      elmnt.scrollIntoView();
+    }, 50);
+    
   }
 
   // Une fois le composant initialisé, on utilise le service PokemonService pour

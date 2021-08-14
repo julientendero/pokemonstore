@@ -14,7 +14,10 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { CardViewComponent } from './card-view/card-view.component';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { CardViewComponent } from './card-view/card-view.component';
     MatSidenavModule,
     HttpClientModule,
     MatGridListModule,
+    MatSnackBarModule,
     StoreModule.forRoot({ cards: cardsReducer, bucket: bucketReducer }),
   ],
   providers: [],
