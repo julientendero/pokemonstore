@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
-import { selectBookCollection, selectBooks } from './state/cards.selector';
+import { selectCardCollection, selectCards } from './state/cards.selector';
 import { AppState } from "./state/app.state";
 import {
-  retrievedBookList,
-  addBook,
-  removeBook,
+  retrievedCardList,
+  addCard,
+  removeCard,
 } from './state/cards.actions';
 
 import { PokemonService } from './services/pokemon.service';
 
+// Composant principal de l'application client de gestion des cartes Pokemon
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,31 +20,35 @@ import { PokemonService } from './services/pokemon.service';
 export class AppComponent {
   showFiller = false;
 
-  public books$ = this.store$.pipe(select(selectBooks));
-  public bookCollection$ = this.store$.pipe(select(selectBookCollection));
+  // Observable sur l'ensemble des cartes disponibles à la vente
+  public cards$ = this.store$.pipe(select(selectCards));
+
+  // Observable sur l'ensemble des cartes selectionnées dans le panier
+  public cardsBucket$ = this.store$.pipe(select(selectCardCollection));
 
 
   constructor(
     private store$: Store<AppState>,
     public pokemonService: PokemonService)
   {
-    //this.pokemonService.getpokemons(1, 50);
   }
 
-  onAdd(bookId: string) {
-    this.store$.dispatch(addBook({ bookId }));
+  onAdd(cardId: string) {
+    this.store$.dispatch(addCard({ cardId }));
   }
  
-  onRemove(bookId: string) {
-    this.store$.dispatch(removeBook({ bookId }));
+  onRemove(cardId: string) {
+    this.store$.dispatch(removeCard({ cardId }));
   }
 
+  // Une fois le composant initialisé, on utilise le service PokemonService pour
+  // récupérer la première page de l'ensemble des cartes (chaque page contenant 50 cartes)
   ngOnInit() {
-    this.pokemonService.getpokemons(1, 50).subscribe((Book) => {
+    this.pokemonService.getpokemons(1, 50).subscribe((Card) => {
 
-      console.log("GET POKEMON 1000: ", Book);
-
-      this.store$.dispatch(retrievedBookList({ Book }))
+      // Une fois les données relatives aux cartes récupérées, on les insérère dans l'état global
+      // en utilisant le store et la fonction retrievedCardList prévue à cet effet
+      this.store$.dispatch(retrievedCardList({ Card }));
     });
   }
 

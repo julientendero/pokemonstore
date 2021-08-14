@@ -1,14 +1,21 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { addBook, removeBook } from './cards.actions';
- 
+import { addCard, removeCard } from './cards.actions';
+
+// Etat correspondant au contenu du panier
 export const initialState: ReadonlyArray<string> = [];
  
-export const collectionReducer = createReducer(
+// ensemble des fonctions relatives au traitement des données
+// contenus dans le panier
+export const bucketReducer = createReducer(
   initialState,
-  on(removeBook, (state, { bookId }) => state.filter((id) => id !== bookId)),
-  on(addBook, (state, { bookId }) => {
-    if (state.indexOf(bookId) > -1) return state;
+
+  // Suppression d'une carte du panier
+  on(removeCard, (state, { cardId }) => state.filter((id) => id !== cardId)),
+
+  // Ajout d'une carte dans le panier
+  on(addCard, (state, { cardId }) => {
+    if (state.indexOf(cardId) > -1) return state;
  
-    return [...state, bookId];
+    return [...state, cardId];
   })
 );

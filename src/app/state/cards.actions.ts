@@ -1,16 +1,24 @@
 import { createAction, props } from '@ngrx/store';
  
-export const addBook = createAction(
-  '[Book List] Add Book',
-  props<{ bookId: any }>()
+/**
+ * Ensemble des actions possible dans l'état global de l'application.
+ * Permet globalement la gestion des produits affichés à l'écran et la gestion du panier
+ */
+
+// Ajout d'une carte pokemon dans le panier courant
+export const addCard = createAction(
+  '[Card List] Add Card',
+  props<{ cardId: any }>()
 );
  
-export const removeBook = createAction(
-  '[Book Collection] Remove Book',
-  props<{ bookId: any }>()
+// Suppression d'une carte pokemon du panier courant
+export const removeCard = createAction(
+  '[Card Collection] Remove Card',
+  props<{ cardId: any }>()
 );
  
-export const retrievedBookList = createAction(
-  '[Book List/API] Retrieve Books Success',
-  props<{ Book: any }>()
+// Récupération des cartes disponibles dans l'état
+export const retrievedCardList = createAction(
+  '[Card List/API] Retrieve Cards Success',
+  props<{ Card: any }>()
 );

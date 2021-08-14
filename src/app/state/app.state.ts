@@ -1,6 +1,9 @@
-import { Book } from '../model/card.model';
+import { Card } from '../model/card.model';
 
+/**
+ * Description de l'état global de l'application client
+ */
 export interface AppState {
-  books: Array<Book>;
-  collection: Array<string>;
+  cards: Array<Card>;     // ensemble des cartes affichées sur l'interface
+  bucket: Array<string>;  // ensemble des cartes selectionnées dans le panier
 }

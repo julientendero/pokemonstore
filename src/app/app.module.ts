@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { booksReducer } from './state/cards.reducer';
-import { collectionReducer } from './state/bucket.reducer';
+import { cardsReducer } from './state/cards.reducer';
+import { bucketReducer } from './state/bucket.reducer';
 import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,10 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { CardViewComponent } from './card-view/card-view.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CardViewComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatSidenavModule,
     HttpClientModule,
     MatGridListModule,
-    StoreModule.forRoot({ books: booksReducer, collection: collectionReducer }),
+    StoreModule.forRoot({ cards: cardsReducer, bucket: bucketReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]

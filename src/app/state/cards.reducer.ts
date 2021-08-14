@@ -1,11 +1,17 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
-import { retrievedBookList } from './cards.actions';
-import { Book } from '../model/card.model';
+import { retrievedCardList } from './cards.actions';
+import { Card } from '../model/card.model';
 
-export const initialState: ReadonlyArray<Book> = [];
+/**
+ * Ensemble des fonctions relatives au traitement des cartes disponibles
+ * affichées à l'écran
+ */
 
-export const booksReducer = createReducer(
+// Ensemble des cartes disponibles
+export const initialState: ReadonlyArray<Card> = [];
+
+export const cardsReducer = createReducer(
   initialState,
-  on(retrievedBookList, (state, { Book }) => [...Book])
+  on(retrievedCardList, (state, { Card }) => [...Card]) // Insertions de cartes dans l'état global
 );

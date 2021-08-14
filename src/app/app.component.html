@@ -1,4 +1,5 @@
 <p>
+  <!-- Menu situé en haut de page -->
   <mat-toolbar>
     <span>Pokemon Store</span>
     <button type="button" mat-button (click)="drawer.toggle()">
@@ -8,46 +9,21 @@
 </p>
 
 
-
-
+<!-- Componsant correspondant au panier de l'utilisateur -->
 <mat-drawer-container class="drawer-container" autosize>
 <mat-drawer #drawer class="example-sidenav" mode="side" position="end">
   <h1>Votre Panier</h1>
-
-  <div class="book-item" *ngFor="let b of bookCollection$ | async">
-      <p *ngIf="b">{{b.name}}</p>
-      <img *ngIf="b && b.images" [src]="b.images.small" alt="image"/>
-    <button
-      *ngIf="b"
-      (click)="onRemove(b.id)"
-      data-test="remove-button"
-    >Retirer du panier</button>
+  <div class="book-item" *ngFor="let cardPanier of cardsBucket$ | async">
+    <app-card-view [card]="cardPanier" [inBucket]="true" (removeCardEvent)="onRemove($event)"></app-card-view>
   </div>
 </mat-drawer>
 
-<mat-grid-list cols="4" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let book of books$ | async">
-    <p *ngIf="book">{{book.name}}</p>
-    <img *ngIf="book && book.images" [src]="book.images.small" alt="image"/>
-    <button
-      *ngIf="book"
-      (click)="onAdd(book.id)"
-      data-test="add-button"
-    >Ajouter au panier</button>
+<!-- Ensemble des cartes disponibles à la vente -->
+<mat-grid-list cols="4" rowHeight="1:1.1">
+  <mat-grid-tile *ngFor="let card of cards$ | async">
+    <app-card-view [card]="card" [inBucket]="false" (addCardEvent)="onAdd($event);drawer.open();"></app-card-view>
   </mat-grid-tile>
 </mat-grid-list>
-
-<!--
-<div class="book-item" *ngFor="let book of books$ | async">
-  <p *ngIf="book">{{book.name}}</p>
-  <img *ngIf="book && book.images" [src]="book.images.small" alt="image"/>
-  <button
-    *ngIf="book"
-    (click)="onAdd(book.id)"
-    data-test="add-button"
-  >Ajouter au panier</button>
-</div>
--->
 
 </mat-drawer-container>
 
