@@ -1,5 +1,5 @@
 # pokemonstore
-simple interface for purchase pokemon cards
+Interface d'achats de cartes Pokemons
 
 Installation:
 
