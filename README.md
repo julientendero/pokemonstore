@@ -1,6 +1,13 @@
 # pokemonstore
 simple interface for purchase pokemon cards
 
+Installation:
+
+- Aprés avoir téléchargé et extrait les sources, lancer les commandes suivantes dans le dossier du projet (cd ./pokemonstore-main):  
+  -npm install: installation des modules  
+  -npm start: lancement du client sur le port 4200  
+- lancer le client  sur l'URL http://localhost:4200/ (testé sur Chrome et Firefox)  
+
 Configuration:
 
 Angular CLI: 12.1.4  
